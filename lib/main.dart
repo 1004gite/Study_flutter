@@ -48,7 +48,7 @@ class _HelloPageState extends State<HelloPage> {
   }
 
   void _addCount() {
-    //setState함수는 UI 변경을 요청한다.
+    //setState함수는 UI 변경을 요청한다
     setState(() {
       _count++;
     });
