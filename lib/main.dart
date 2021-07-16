@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'second_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,6 +60,17 @@ class _HelloPageState extends State<HelloPage> {
                   setState(() {
                     _cuperSwitchValue = v;
                   });
+                }
+            ),
+            RaisedButton(
+              child: Text('화면전환'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SecondPage()
+                    )
+                  );
                 }
             )
           ],
