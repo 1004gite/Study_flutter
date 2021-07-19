@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'clone_ins.dart';
 import 'second_page.dart';
 
 void main() => runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue
       ),
       //위쪽에서 기본적인 테마를 정한 후 아래의 내용은 HelloPage에서 관리
       home: HelloPage('Hello World')
@@ -63,13 +64,24 @@ class _HelloPageState extends State<HelloPage> {
                 }
             ),
             RaisedButton(
-              child: Text('화면전환'),
+              child: Text('화면전환 테스트'),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => SecondPage()
                     )
+                  );
+                }
+            ),
+            RaisedButton(
+                child: Text('인스타그램 클론'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RootPage()
+                      )
                   );
                 }
             )
