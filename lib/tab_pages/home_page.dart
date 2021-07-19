@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody() {
+  _buildBody() {
     return Padding(
       //모든 모서리에 패딩 적용
       padding: EdgeInsets.all(8.0),
