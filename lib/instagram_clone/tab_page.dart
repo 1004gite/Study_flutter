@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/tab_pages/account_page.dart';
-import 'package:flutter_base/tab_pages/home_page.dart';
+import 'package:flutter_base/instagram_clone/tab_pages/account_page.dart';
+import 'package:flutter_base/instagram_clone/tab_pages/home_page.dart';
+import 'package:flutter_base/instagram_clone/tab_pages/search_page.dart';
 
 class TabPage extends StatefulWidget {
   const TabPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _TabPageState extends State<TabPage> {
 
   List _pages = [
     HomePage(),
-    Text('page2'),
+    SearchPage(),
     AccountPage(),
   ];
 
