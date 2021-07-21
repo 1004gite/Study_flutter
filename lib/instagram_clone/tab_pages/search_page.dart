@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_base/instagram_clone/tab_pages/create_pages/create_page.dart';
 
@@ -9,8 +11,12 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+
+  // List<File> gridItems = [];
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
@@ -32,6 +38,7 @@ class _SearchPageState extends State<SearchPage> {
           mainAxisSpacing: 1.0,
           crossAxisSpacing: 1.0,
         ),
+        itemCount: 5,//gridItems.length,
         //그리드뷰의 어댑터 역할
         itemBuilder: (buildContext, index) {
           return _buildListItem(buildContext,index);
@@ -40,6 +47,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _buildListItem(BuildContext buildContext, int index) {
-
+    // return Image.file(gridItems[index]);
+    return Image.network('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
   }
 }

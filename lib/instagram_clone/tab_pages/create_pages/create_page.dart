@@ -1,4 +1,7 @@
+import 'dart:io'; //이미지 파일을 위한 import
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreatePage extends StatefulWidget {
   const CreatePage({Key? key}) : super(key: key);
@@ -10,6 +13,8 @@ class CreatePage extends StatefulWidget {
 class _CreatePageState extends State<CreatePage> {
 
   TextEditingController textEditingController = TextEditingController();
+  late File _image;
+  var check = false;
 
   //dispose는 클래스가 소멸할 때 호출된다.
   @override
@@ -26,7 +31,7 @@ class _CreatePageState extends State<CreatePage> {
       appBar: _buildAppbar(),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
+        onPressed: _getImage,
         child: Icon(Icons.add_a_photo),
       ),
     );
@@ -46,12 +51,22 @@ class _CreatePageState extends State<CreatePage> {
   _buildBody() {
     return Column(
       children: [
-        Text('No Image.'),
+        (!check)? Text('No Image.') : Image.file(_image),
         TextField(
           decoration: InputDecoration(hintText: '내용을 입력하세요.'),
           controller: textEditingController,
         )
       ],
     );
+  }
+
+  Future<void> _getImage() async {
+    //Future는 3가지 상태를 가지는 dart언어의 타입이다.
+    //await는 비동기를 이용할 떄 사용
+    File image = (await ImagePicker().pickImage(source: ImageSource.gallery)) as File;
+    setState(() { //사진이 선택되면 화면이 바뀌어야 하므로 setState사용
+      _image = image;
+      check = true;
+    });
   }
 }
