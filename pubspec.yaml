@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   #사진 불러오기를 위한 라이브러리 추가
   image_picker: ^0.8.2
+  #로그인 버튼을 위한 라이브러리
+  flutter_signin_button: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -48,6 +48,6 @@ class _SearchPageState extends State<SearchPage> {
 
   _buildListItem(BuildContext buildContext, int index) {
     // return Image.file(gridItems[index]);
-    return Image.network('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+    return ;
   }
 }

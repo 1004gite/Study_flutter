@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/instagram_clone/login_page.dart';
 import 'instagram_clone/tab_page.dart';
 
 class RootPage extends StatelessWidget {
@@ -13,7 +14,7 @@ class RootPage extends StatelessWidget {
             primaryColor: Colors.white,
             accentColor: Colors.black
         ),
-        home: TabPage()
+        home: LoginPage()
     );
   }
 }
