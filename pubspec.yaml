@@ -32,6 +32,9 @@ dependencies:
   image_picker: ^0.8.2
   #로그인 버튼을 위한 라이브러리
   flutter_signin_button: ^2.0.0
+  #firebase google login을 위한 라이브러리
+  google_sign_in: ^4.0.0
+  firebase_auth: ^0.8.0+1
 
 dev_dependencies:
   flutter_test:
