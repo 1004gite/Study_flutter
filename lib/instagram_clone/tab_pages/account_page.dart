@@ -4,7 +4,9 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AccountPage extends StatefulWidget {
-  const AccountPage({Key? key}) : super(key: key);
+  final FirebaseUser user;
+  AccountPage(this.user);
+  // const AccountPage({Key? key}) : super(key: key);
 
   @override
   _AccountPageState createState() => _AccountPageState();
@@ -53,7 +55,7 @@ class _AccountPageState extends State<AccountPage> {
                         width: 80.0,
                         height: 80.0,
                         child: CircleAvatar(
-                          backgroundColor: Colors.black,
+                          backgroundImage: NetworkImage(widget.user.photoUrl),
                         ),
                       ),
                       //floatingButton의 크기를 정하기 위해 작은 SizedBox를 만들어 그 안에 버튼을 넣었다.
@@ -89,7 +91,7 @@ class _AccountPageState extends State<AccountPage> {
                     ],
                   ),
                   Padding(padding: EdgeInsets.all(8.0)),
-                  Text('김기태',
+                  Text(widget.user.displayName,
                     //텍스트를 가운데정렬
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
