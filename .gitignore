@@ -47,3 +47,4 @@ app.*.map.json
 
 #파이어베이스 인증서
 /android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
