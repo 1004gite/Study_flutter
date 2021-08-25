@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base/instagram_clone/tab_pages/create_pages/create_page.dart';
+import 'package:flutter_base/instagram_clone/tab_pages/sub_pages/create_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_base/instagram_clone/tab_pages/sub_pages/post_page.dart';
 
 class SearchPage extends StatefulWidget {
   // const SearchPage({Key? key}) : super(key: key);
@@ -66,9 +67,17 @@ class _SearchPageState extends State<SearchPage> {
 
   _buildListItem(buildContext, document) {
     // return Image.file(gridItems[index]);
-    return Image.network(
-      document['photoUrl'],
-      fit: BoxFit.cover,
+    //InkWell은 클릭시 물방울 퍼지는 효과를 주고 onTap기능 지정가능
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return PostPage(document);
+        }));
+      },
+      child: Image.network(
+        document['photoUrl'],
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
