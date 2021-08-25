@@ -23,7 +23,7 @@ class _TabPageState extends State<TabPage> {
     // widget.은 initState혹은 build에서만 접근 가능
     _pages = [
       HomePage(widget.user),
-      SearchPage(),
+      SearchPage(widget.user),
       AccountPage(widget.user),
     ];
     super.initState();

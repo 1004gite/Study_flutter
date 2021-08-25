@@ -2,9 +2,14 @@ import 'dart:io'; //이미지 파일을 위한 import
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CreatePage extends StatefulWidget {
-  const CreatePage({Key? key}) : super(key: key);
+  // const CreatePage({Key? key}) : super(key: key);
+  final FirebaseUser user;
+  CreatePage(this.user);
 
   @override
   _CreatePageState createState() => _CreatePageState();
@@ -15,6 +20,7 @@ class _CreatePageState extends State<CreatePage> {
   TextEditingController textEditingController = TextEditingController();
   late File _image;
   var check = false;
+  final _picker = ImagePicker();
 
   //dispose는 클래스가 소멸할 때 호출된다.
   @override
@@ -41,7 +47,33 @@ class _CreatePageState extends State<CreatePage> {
     return AppBar(
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              //firebase storage에 이미지 업로드
+              final firebaseStorageRef = FirebaseStorage.instance
+                  .ref()
+                  .child('post')
+                  .child('${DateTime.now().millisecondsSinceEpoch}.png');
+              final task = firebaseStorageRef.putFile(
+                _image, StorageMetadata(contentType: 'image/png'));
+
+              //이미지 업로드 후 정보를 firebase 데이터베이스에 저장
+              task.onComplete.then((value) {
+                var downUrl = value.ref.getDownloadURL();
+                downUrl.then((uri) {
+                  var doc = Firestore.instance.collection('post').document();
+                  doc.setData({
+                    'id': doc.documentID,
+                    'photoUrl': uri.toString(),
+                    'contents': textEditingController.text,
+                    'email': widget.user.email,
+                    'displayName': widget.user.displayName,
+                    'userPhotoUrl': widget.user.photoUrl
+                  }).then((value) {
+                    Navigator.pop(context);
+                  });
+                });
+              });
+            },
             icon: Icon(Icons.send)
         ),
       ],
@@ -49,23 +81,26 @@ class _CreatePageState extends State<CreatePage> {
   }
 
   _buildBody() {
-    return Column(
-      children: [
-        (!check)? Text('No Image.') : Image.file(_image),
-        TextField(
-          decoration: InputDecoration(hintText: '내용을 입력하세요.'),
-          controller: textEditingController,
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          (!check)? Text('No Image.') : Image.file(_image),
+          TextField(
+            decoration: InputDecoration(hintText: '내용을 입력하세요.'),
+            controller: textEditingController,
+          )
+        ],
+      ),
     );
   }
 
   Future<void> _getImage() async {
     //Future는 3가지 상태를 가지는 dart언어의 타입이다.
     //await는 비동기를 이용할 떄 사용
-    File image = (await ImagePicker().pickImage(source: ImageSource.gallery)) as File;
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    File file = File(image!.path);
     setState(() { //사진이 선택되면 화면이 바뀌어야 하므로 setState사용
-      _image = image;
+      _image = file;
       check = true;
     });
   }
