@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
       //위쪽에서 기본적인 테마를 정한 후 아래의 내용은 HelloPage에서 관리
       home: HelloPage('Hello World')
