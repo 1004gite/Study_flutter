@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AccountPage extends StatefulWidget {
   final FirebaseUser user;
@@ -14,6 +15,20 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   final GoogleSignIn _googlesignIn = GoogleSignIn();
+  int _postcount = 0;
+
+  @override
+  void initState() {
+    // 데이터베이스의 post 폴더 중 email이 본인인 documents만 가져온다.
+    Firestore.instance.collection('post')
+    .where('email', isEqualTo: widget.user.email).getDocuments()
+    .then((snapshot) {
+      setState(() {
+        _postcount = snapshot.documents.length;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +113,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ],
               ),
-              Text('0\n게시물',
+              Text('$_postcount\n게시물',
                 //텍스트를 가운데정렬
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),

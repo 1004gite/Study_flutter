@@ -41,7 +41,11 @@ class PostPage extends StatelessWidget {
                 ],
               ),
             ),
-            Image.network(document['photoUrl']),
+            Hero(
+              //뒤로가기시 searchPage에서 넘어오는 tag와 같은 위젯에 들어가는 효과를 줌
+              tag: document['photoUrl'],
+                child: Image.network(document['photoUrl'])
+            ),
             Padding(
               padding: EdgeInsets.all(8.0),
                 child: Text(document['contents'])

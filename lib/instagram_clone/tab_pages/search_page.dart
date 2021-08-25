@@ -68,15 +68,21 @@ class _SearchPageState extends State<SearchPage> {
   _buildListItem(buildContext, document) {
     // return Image.file(gridItems[index]);
     //InkWell은 클릭시 물방울 퍼지는 효과를 주고 onTap기능 지정가능
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return PostPage(document);
-        }));
-      },
-      child: Image.network(
-        document['photoUrl'],
-        fit: BoxFit.cover,
+    return Hero(
+      //클릭시 화면전환 애니매이션을 위한 Hero위젯 사용
+      tag: document['photoUrl'],
+      child: Material(
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PostPage(document);
+            }));
+          },
+          child: Image.network(
+            document['photoUrl'],
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }
