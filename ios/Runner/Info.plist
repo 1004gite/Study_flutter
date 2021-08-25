@@ -43,6 +43,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string>파일 접근권한</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>갤러리 접근권한</string>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라 접근권한</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
